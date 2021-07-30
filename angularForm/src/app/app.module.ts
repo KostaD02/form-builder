@@ -7,9 +7,10 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './views/home-page/home-page.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent],
+  declarations: [AppComponent, HomePageComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
