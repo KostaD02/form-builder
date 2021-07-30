@@ -40,6 +40,37 @@ export class User {
   public country: string;
   public phoneNumber: string;
   public universityYears: number;
+  public currentPosition: string;
+  public plans: string;
+  public haveComputer: boolean;
+  constructor(
+    FullName: string,
+    Email: string,
+    Country: string,
+    PhoneNumber: string,
+    universityYears: number,
+    CurrentPosition: string,
+    Plans: string,
+    HaveComputer: boolean
+  ) {
+    this.fullName = FullName;
+    this.email = Email;
+    this.country = Country;
+    this.phoneNumber = PhoneNumber;
+    this.universityYears = universityYears;
+    this.currentPosition = CurrentPosition;
+    this.plans = Plans;
+    this.haveComputer = HaveComputer;
+  }
+}
+
+/* last version
+export class User {
+  public fullName: string;
+  public email: string;
+  public country: string;
+  public phoneNumber: string;
+  public universityYears: number;
   public technologies: Technologies[] = [];
   public currentPosition: string;
   public plans: string;
@@ -72,3 +103,5 @@ export class User {
     this.haveComputer = HaveComputer;
   }
 }
+
+*/

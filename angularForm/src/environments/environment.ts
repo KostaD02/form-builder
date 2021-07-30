@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  firebaseCollections: {
+    user: 'user-collection',
+  },
   firebaseConfig: {
     apiKey: 'AIzaSyBye4lws_IgmPZfS5F5IpNe_uDp3z19WnY',
     authDomain: 'angularformworking.firebaseapp.com',

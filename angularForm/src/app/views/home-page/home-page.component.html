@@ -1,44 +1,51 @@
 <section>
 
-    <form #form="ngForm" (ngSumbit)="createUser(form)">
-        <div class="form-group">
-            <h2>Student profile</h2>
-            <input type="text" class="form-control" ngModel placeholder="Full name * " name="fullName">
-            <input type="text" class="form-control" ngModel placeholder="Email* " name="email">
-            <select class="form-select" ngModel name="country">
-                <option selected value="ge">Georgia</option>
-                <option value="ua">Ukraine</option>
-                <option value="us">USA</option>
-                <option value="other">Other</option>
-            </select>
-            <input type="text" class="form-control" ngModel placeholder="Phone *" name="phoneNumber">
-            <input type="number" class="form-control" ngModel placeholder="Finished university years"
-                name="universityYears">
-        </div>
-
-        <div class="form-group">
-            <h3>Primary technologies</h3>
-            <!--technology&experience-->
-            <!--button add-->
-            <input type="text" class="form-control" ngModel placeholder="Current job position" name="currentPosition">
-            <textarea class="form-control" ngModel placeholder="Plans for the next year *" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <h3>Links</h3>
-            <input type="text" class="form-control" ngModel placeholder="GitHub profile *" name="">
-            <input type="text" class="form-control" ngModel placeholder="Linkedin profile" name="">
-            <input type="text" class="form-control" ngModel placeholder="Public website" name="">
-            <input type="text" class="form-control" ngModel placeholder="Link to CV" name="">
-        </div>
-        <div class="form-group">
-            <h3>Links to your projects</h3>
-            <!--name&link-->
-            <!--button add-->
-        </div>
-        <input class="form-check-input" type="checkbox" value="" name="haveComputer">
-        <label class="form-check-label" for="haveComputer">
-            Have a computer and internet
-        </label> <br>
-        <button type="button" class="btn btn-primary col-md-12">Sumbit</button>
+    <form #form="ngForm" (ngSubmit)="createUser(form)">
+        <h2>Student profile</h2>
+        <input type="text" class="form-control" ngModel placeholder="Full name * " name="fullName">
+        <input type="mail" class="form-control" ngModel placeholder="Email* " name="email">
+        <select class="form-select" ngModel name="country">
+            <option value="ge">Georgia</option>
+            <option value="ua">Ukraine</option>
+            <option value="us">USA</option>
+            <option value="other">Other</option>
+        </select>
+        <input type="text" class="form-control" ngModel placeholder="Phone *" name="phoneNumber">
+        <input type="number" class="form-control" ngModel placeholder="Finished university years"
+            name="universityYears">
+        <!--#1-->
+        <input type="text" class="form-control" ngModel placeholder="Current job position" name="currentPosition">
+        <textarea class="form-control" name="plans" ngModel placeholder="Plans for the next year *" rows="3"></textarea>
+        <!--#2-->
+        <!--#3-->
+        <p>
+            <input class="form-check-input" type="checkbox" name="haveComputer">
+            <label class="form-check-label" for="haveComputer">
+                Have a computer and internet
+            </label>
+        </p>
+        <button class="btn btn-primary col-md-12">Sumbit</button>
     </form>
 </section>
+<!--
+#1
+        <div class="form-group">
+            <h3>Primary technologies</h3>
+            technology&experience
+            <button add
+        </div>
+#2
+        <div class="form-group">
+            <h3>Links</h3>
+            <input type="text" class="form-control" ngModel placeholder="GitHub profile *" name="links.github">
+            <input type="text" class="form-control" ngModel placeholder="Linkedin profile" name="links.linkedin">
+            <input type="text" class="form-control" ngModel placeholder="Public website" name="links.website">
+            <input type="text" class="form-control" ngModel placeholder="Link to CV" name="links.cvLink">
+        </div>
+#3
+        <div class="form-group">
+            <h3>Links to your projects</h3>
+            name&link
+            button add
+        </div>
+-->

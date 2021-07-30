@@ -1,1 +1,29 @@
- 
+section {
+  width: 600px;
+  margin: 30px auto;
+  font-family: "Roboto", sans-serif;
+}
+section form input,
+textarea,
+select {
+  margin: 10px 0px 10px 0px;
+}
+section form {
+  border: 1px solid grey;
+  padding: 15px;
+}
+section form h2,
+h3 {
+  font-weight: 300;
+}
+section form .form-group {
+  border: 1px solid grey;
+  padding: 10px;
+}
+section form p input {
+  margin-right: 10px;
+  margin-top: 3px;
+}
+section form p {
+  margin-top: 15px;
+}
