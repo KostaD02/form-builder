@@ -7,6 +7,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: 'AIzaSyBye4lws_IgmPZfS5F5IpNe_uDp3z19WnY',
     authDomain: 'angularformworking.firebaseapp.com',
+    databaseURL: 'https://angularformworking-default-rtdb.firebaseio.com',
     projectId: 'angularformworking',
     storageBucket: 'angularformworking.appspot.com',
     messagingSenderId: '364056266455',
@@ -14,7 +15,7 @@ export const environment = {
     measurementId: 'G-QTVMCJRHV9',
   },
 };
-// IF SOMEONE START USING MY FIREBASE CLIENT PLEASE USE IT WISELY
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
