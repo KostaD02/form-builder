@@ -9,7 +9,8 @@ select {
   margin: 10px 0px 10px 0px;
 }
 section form {
-  border: 1px solid grey;
+  border: 3px solid whitesmoke;
+  border-radius: 10px;
   padding: 15px;
 }
 section form h2,
@@ -17,7 +18,9 @@ h3 {
   font-weight: 300;
 }
 section form .form-group {
-  border: 1px solid grey;
+  border: 3px solid whitesmoke;
+  border-radius: 10px;
+  margin: 10px 0px 10px 0px;
   padding: 10px;
 }
 section form p input {
@@ -26,4 +29,17 @@ section form p input {
 }
 section form p {
   margin-top: 15px;
+}
+section .boxes {
+  width: 80%;
+  display: inline-block;
+}
+section .buttonBox {
+  float: right;
+}
+section .buttonBox button {
+  margin-top: 30px;
+}
+section .form-group button {
+  margin-top: 10px;
 }

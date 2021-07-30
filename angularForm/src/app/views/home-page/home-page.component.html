@@ -1,51 +1,76 @@
 <section>
 
-    <form #form="ngForm" (ngSubmit)="createUser(form)">
+    <form [formGroup]="myForm">
         <h2>Student profile</h2>
-        <input type="text" class="form-control" ngModel placeholder="Full name * " name="fullName">
-        <input type="mail" class="form-control" ngModel placeholder="Email* " name="email">
-        <select class="form-select" ngModel name="country">
-            <option value="ge">Georgia</option>
+        <input type="text" class="form-control" placeholder="Full name * " formControlName="fullName" required
+            pattern="[a-zA-Z ]+">
+        <input type="mail" class="form-control" placeholder="Email* " formControlName="email" required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        <select class="form-select" formControlName="country" required>
+            <option selected value="ge">Georgia</option>
             <option value="ua">Ukraine</option>
             <option value="us">USA</option>
             <option value="other">Other</option>
         </select>
-        <input type="text" class="form-control" ngModel placeholder="Phone *" name="phoneNumber">
-        <input type="number" class="form-control" ngModel placeholder="Finished university years"
-            name="universityYears">
-        <!--#1-->
-        <input type="text" class="form-control" ngModel placeholder="Current job position" name="currentPosition">
-        <textarea class="form-control" name="plans" ngModel placeholder="Plans for the next year *" rows="3"></textarea>
-        <!--#2-->
-        <!--#3-->
+        <input type="text" class="form-control" placeholder="Phone *" formControlName="phoneNumber" required
+            pattern="^[0-9]+[0-15]*$">
+        <input min="0" minlength="2" type="number" class="form-control" placeholder="Finished university years"
+            formControlName="universityYears">
+        <div class="form-group">
+            <h3>Primary technologies</h3>
+            <input type="text" class="form-control" placeholder="Technology * " required
+                formControlName="technologiesFirstIndexItem">
+            <input type="number" class="form-control" placeholder="Experience(years) * " required
+                formControlName="technologiesFirstIndexitem">
+            <div class="box" formArrayName="technologies">
+                <div *ngFor="let technologies of technologiesForms.controls;let i=index" [formGroupName]="i">
+                    <div class="boxes">
+                        <input type="text" class="form-control" placeholder="Technology * " required
+                            formControlName="technology">
+                        <input type="number" class="form-control" placeholder="Experience(years) * " required
+                            formControlName="experience">
+                    </div>
+                    <div class="buttonBox">
+                        <button class="btn btn-danger" (click)="deleteTechnologies(i)">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <button (click)="addTechnologies()" class="btn btn-success">Add</button>
+        </div>
+        <input type="text" class="form-control" placeholder="Current job position" formControlName="currentPosition">
+        <textarea class="form-control" formControlName="plans" placeholder="Plans for the next year *"
+            rows="3"></textarea>
+        <div class="form-group">
+            <h3>Links</h3>
+            <input type="text" class="form-control" placeholder="GitHub profile *" required formControlName="github">
+            <input type="text" class="form-control" placeholder="Linkedin profile" formControlName="linkedin">
+            <input type="text" class="form-control" placeholder="Public website" formControlName="website">
+            <input type="text" class="form-control" placeholder="Link to CV" formControlName="cv">
+        </div>
+        <div class="form-group">
+            <h3>Links to your projects</h3>
+            <input type="text" class="form-control" placeholder="Name *" required formControlName="linksFirstIndexItem">
+            <input type="text" class="form-control" placeholder="Link *" required formControlName="linksFirstIndexitem">
+            <div class="box" formArrayName="links">
+                <div *ngFor="let links of linksForms.controls;let i=index" [formGroupName]="i">
+                    <div class="boxes">
+                        <input type="text" class="form-control" placeholder="Name *" required formControlName="name">
+                        <input type="text" class="form-control" placeholder="Link *" required formControlName="link">
+                    </div>
+                    <div class="buttonBox">
+                        <button class="btn btn-danger" (click)="deleteLinks(i)">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <button (click)="addLinks()" class="btn btn-success">Add</button>
+        </div>
         <p>
-            <input class="form-check-input" type="checkbox" name="haveComputer">
+            <input class="form-check-input" type="checkbox" formControlName="haveComputer">
             <label class="form-check-label" for="haveComputer">
                 Have a computer and internet
             </label>
         </p>
-        <button class="btn btn-primary col-md-12">Sumbit</button>
+        <button [disabled]="!myForm.valid" class="btn btn-primary col-md-12"
+            (click)="createUser(myForm.value)">Sumbit</button>
     </form>
 </section>
-<!--
-#1
-        <div class="form-group">
-            <h3>Primary technologies</h3>
-            technology&experience
-            <button add
-        </div>
-#2
-        <div class="form-group">
-            <h3>Links</h3>
-            <input type="text" class="form-control" ngModel placeholder="GitHub profile *" name="links.github">
-            <input type="text" class="form-control" ngModel placeholder="Linkedin profile" name="links.linkedin">
-            <input type="text" class="form-control" ngModel placeholder="Public website" name="links.website">
-            <input type="text" class="form-control" ngModel placeholder="Link to CV" name="links.cvLink">
-        </div>
-#3
-        <div class="form-group">
-            <h3>Links to your projects</h3>
-            name&link
-            button add
-        </div>
--->
