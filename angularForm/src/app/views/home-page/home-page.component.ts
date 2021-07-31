@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { FirebaseClientService } from './../../services/firebase-client.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -31,26 +31,27 @@ export class HomePageComponent implements OnInit {
       linkedin: '',
       website: '',
       cv: '',
-      links: this.fb.array([]),
-      linksFirstIndexItem: '',
-      linksFirstIndexitem: '',
+      projects: this.fb.array([]),
+      projectsFirstIndexItem: '',
+      projectsFirstIndexitem: '',
+      links: {},
     });
   }
   get technologiesForms() {
     return this.myForm.get('technologies') as FormArray;
   }
-  get linksForms() {
-    return this.myForm.get('links') as FormArray;
+  get projectsForms() {
+    return this.myForm.get('projects') as FormArray;
   }
-  addLinks() {
-    const links = this.fb.group({
+  addprojects() {
+    const projects = this.fb.group({
       name: '',
       link: '',
     });
-    this.linksForms.push(links);
+    this.projectsForms.push(projects);
   }
-  deleteLinks(i: number) {
-    this.linksForms.removeAt(i);
+  deleteprojects(i: number) {
+    this.projectsForms.removeAt(i);
   }
   addTechnologies() {
     const technologies = this.fb.group({
@@ -62,6 +63,16 @@ export class HomePageComponent implements OnInit {
   deleteTechnologies(i: number) {
     this.technologiesForms.removeAt(i);
   }
+  displayForm(data: any) {
+    Swal.fire({
+      title: '<strong>Sumbitted form</strong>',
+      html: `${JSON.stringify(data, null, 4)}`,
+      focusConfirm: true,
+    });
+    console.log(data);
+    this.firebase.createUser(data);
+    //this.myForm.reset(); optional to clear
+  }
   createUser(value: any) {
     value['technologies'].unshift({
       technology: value.technologiesFirstIndexItem,
@@ -69,12 +80,20 @@ export class HomePageComponent implements OnInit {
     });
     delete value.technologiesFirstIndexItem;
     delete value.technologiesFirstIndexitem;
-    value['links'].unshift({
-      name: value.linksFirstIndexItem,
-      link: value.linksFirstIndexitem,
+    value['projects'].unshift({
+      name: value.projectsFirstIndexItem,
+      link: value.projectsFirstIndexitem,
     });
-    delete value.linksFirstIndexItem;
-    delete value.linksFirstIndexitem;
-    console.log(value);
+    delete value.projectsFirstIndexItem;
+    delete value.projectsFirstIndexitem;
+    value.links.github = value.github;
+    value.links.linkedin = value.linkedin;
+    value.links.website = value.website;
+    value.links.cv = value.cv;
+    delete value.github;
+    delete value.linkedin;
+    delete value.website;
+    delete value.cv;
+    this.displayForm(value);
   }
 }

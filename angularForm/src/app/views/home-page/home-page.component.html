@@ -21,14 +21,14 @@
             <input type="text" class="form-control" placeholder="Technology * " required
                 formControlName="technologiesFirstIndexItem">
             <input type="number" class="form-control" placeholder="Experience(years) * " required
-                formControlName="technologiesFirstIndexitem">
+                pattern="^[0-9]+[0-99]*$" formControlName="technologiesFirstIndexitem">
             <div class="box" formArrayName="technologies">
                 <div *ngFor="let technologies of technologiesForms.controls;let i=index" [formGroupName]="i">
                     <div class="boxes">
                         <input type="text" class="form-control" placeholder="Technology * " required
                             formControlName="technology">
                         <input type="number" class="form-control" placeholder="Experience(years) * " required
-                            formControlName="experience">
+                            formControlName="experience" pattern="^[0-9]+[0-15]*$">
                     </div>
                     <div class="buttonBox">
                         <button class="btn btn-danger" (click)="deleteTechnologies(i)">Remove</button>
@@ -42,27 +42,34 @@
             rows="3"></textarea>
         <div class="form-group">
             <h3>Links</h3>
-            <input type="text" class="form-control" placeholder="GitHub profile *" required formControlName="github">
-            <input type="text" class="form-control" placeholder="Linkedin profile" formControlName="linkedin">
-            <input type="text" class="form-control" placeholder="Public website" formControlName="website">
-            <input type="text" class="form-control" placeholder="Link to CV" formControlName="cv">
+            <input type="text" class="form-control" placeholder="GitHub profile *" required formControlName="github"
+                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+            <input type="text" class="form-control" placeholder="Linkedin profile" formControlName="linkedin"
+                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+            <input type="text" class="form-control" placeholder="Public website" formControlName="website"
+                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+            <input type="text" class="form-control" placeholder="Link to CV" formControlName="cv"
+                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
         </div>
         <div class="form-group">
             <h3>Links to your projects</h3>
-            <input type="text" class="form-control" placeholder="Name *" required formControlName="linksFirstIndexItem">
-            <input type="text" class="form-control" placeholder="Link *" required formControlName="linksFirstIndexitem">
-            <div class="box" formArrayName="links">
-                <div *ngFor="let links of linksForms.controls;let i=index" [formGroupName]="i">
+            <input type="text" class="form-control" placeholder="Name *" required
+                formControlName="projectsFirstIndexItem">
+            <input type="text" class="form-control" placeholder="Link *" required
+                formControlName="projectsFirstIndexitem">
+            <div class="box" formArrayName="projects">
+                <div *ngFor="let projects of projectsForms.controls;let i=index" [formGroupName]="i">
                     <div class="boxes">
                         <input type="text" class="form-control" placeholder="Name *" required formControlName="name">
-                        <input type="text" class="form-control" placeholder="Link *" required formControlName="link">
+                        <input type="text" class="form-control" placeholder="Link *" required formControlName="link"
+                            pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
                     </div>
                     <div class="buttonBox">
-                        <button class="btn btn-danger" (click)="deleteLinks(i)">Remove</button>
+                        <button class="btn btn-danger" (click)="deleteprojects(i)">Remove</button>
                     </div>
                 </div>
             </div>
-            <button (click)="addLinks()" class="btn btn-success">Add</button>
+            <button (click)="addprojects()" class="btn btn-success">Add</button>
         </div>
         <p>
             <input class="form-check-input" type="checkbox" formControlName="haveComputer">
