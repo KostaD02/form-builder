@@ -43,13 +43,13 @@
         <div class="form-group">
             <h3>Links</h3>
             <input type="text" class="form-control" placeholder="GitHub profile *" required formControlName="github"
-                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
             <input type="text" class="form-control" placeholder="Linkedin profile" formControlName="linkedin"
-                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
             <input type="text" class="form-control" placeholder="Public website" formControlName="website"
-                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
             <input type="text" class="form-control" placeholder="Link to CV" formControlName="cv"
-                pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
         </div>
         <div class="form-group">
             <h3>Links to your projects</h3>
@@ -62,7 +62,7 @@
                     <div class="boxes">
                         <input type="text" class="form-control" placeholder="Name *" required formControlName="name">
                         <input type="text" class="form-control" placeholder="Link *" required formControlName="link"
-                            pattern="[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}(.[a-z]{2,4})?\b(/[-a-zA-Z0-9@:%_+.~#?&//=]*)?">
+                            pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
                     </div>
                     <div class="buttonBox">
                         <button class="btn btn-danger" (click)="deleteprojects(i)">Remove</button>
