@@ -1,74 +1,153 @@
-export class Links {
-  public github: string;
-  public linkedin: string;
-  public website: string;
-  public cvLink: string;
-  constructor(
-    Github: string,
-    Linkedin: string,
-    Website: string,
-    CvLink: string
-  ) {
-    this.github = Github;
-    this.linkedin = Linkedin;
-    this.website = Website;
-    this.cvLink = CvLink;
-  }
-}
-
-export class Project {
-  public name: string;
-  public link: string;
-  constructor(Name: string, Link: string) {
-    this.name = Name;
-    this.link = Link;
-  }
-}
-
-export class Technologies {
-  public technology: string;
-  public experience: number;
-  constructor(Technology: string, Experience: number) {
-    this.technology = Technology;
-    this.experience = Experience;
-  }
-}
-
 export class User {
-  public fullName: string;
-  public email: string;
-  public country: string;
-  public phoneNumber: string;
-  public universityYears: number;
-  public technologies: Technologies[] = [];
-  public currentPosition: string;
-  public plans: string;
-  public links: Links[];
-  public projects: Project[];
-  public haveComputer: boolean;
-  constructor(
-    FullName: string,
-    Email: string,
-    Country: string,
-    PhoneNumber: string,
-    universityYears: number,
-    Technologies: Technologies[],
-    CurrentPosition: string,
-    Plans: string,
-    Links: Links[],
-    Projects: Project[],
-    HaveComputer: boolean
-  ) {
-    this.fullName = FullName;
-    this.email = Email;
-    this.country = Country;
-    this.phoneNumber = PhoneNumber;
-    this.universityYears = universityYears;
-    this.technologies = Technologies;
-    this.currentPosition = CurrentPosition;
-    this.plans = Plans;
-    this.links = Links;
-    this.projects = Projects;
-    this.haveComputer = HaveComputer;
-  }
+  public objectSchema!: {
+    type: 'object';
+    name: 'profile';
+    label: 'Student profile';
+    properties: [
+      {
+        type: 'string';
+        name: 'fullName';
+        label: 'Full name';
+        required: true;
+      },
+      {
+        type: 'string';
+        name: 'email';
+        label: 'Email';
+        inputType: 'email';
+        required: true;
+      },
+      {
+        type: 'enum';
+        name: 'country';
+        label: 'Country';
+        options: [
+          {
+            value: 'ge';
+            label: 'Georgia';
+          },
+          {
+            value: 'ua';
+            label: 'Ukraine';
+          }
+        ];
+      },
+      {
+        type: 'string';
+        name: 'phone';
+        label: 'Phone';
+        inputType: 'tel';
+        required: true;
+        minLength: 8;
+        maxLength: 20;
+        pattern: '^\\d{8,20}$';
+      },
+      {
+        type: 'number';
+        name: 'universityYears';
+        label: 'Finished university years';
+        integer: true;
+        minimum: 1;
+        maximum: 6;
+      },
+      {
+        type: 'array';
+        name: 'technologies';
+        label: 'Primary technologies';
+        required: true;
+        item: {
+          type: 'object';
+          name: 'technology';
+          properties: [
+            {
+              type: 'string';
+              label: 'Technology';
+              name: 'technology';
+              required: true;
+            },
+            {
+              type: 'number';
+              label: 'Experience (years)';
+              name: 'experience';
+              integer: true;
+              required: true;
+            }
+          ];
+        };
+      },
+      {
+        name: 'currentPosition';
+        type: 'string';
+        label: 'Current job position';
+        required: false;
+      },
+      {
+        type: 'string';
+        name: 'plans';
+        label: 'Plans for the next year';
+        required: true;
+        multiline: true;
+      },
+      {
+        type: 'object';
+        name: 'links';
+        label: 'Links';
+        properties: [
+          {
+            type: 'string';
+            name: 'github';
+            label: 'GitHub profile';
+            required: true;
+          },
+          {
+            type: 'string';
+            name: 'linkedin';
+            label: 'LinkedIn profile';
+            required: false;
+          },
+          {
+            type: 'string';
+            name: 'website';
+            label: 'Public website';
+            required: false;
+          },
+          {
+            type: 'string';
+            name: 'cv';
+            label: 'Link to CV';
+            required: false;
+          }
+        ];
+      },
+      {
+        type: 'array';
+        name: 'projects';
+        label: 'Links to your projects';
+        required: true;
+        item: {
+          type: 'object';
+          name: 'project';
+          properties: [
+            {
+              type: 'string';
+              name: 'name';
+              label: 'Name';
+              required: true;
+            },
+            {
+              type: 'string';
+              name: 'link';
+              label: 'Link';
+              required: true;
+            }
+          ];
+        };
+      },
+      {
+        type: 'boolean';
+        name: 'haveComputer';
+        label: 'Have a computer and internet';
+      }
+    ];
+  };
 }

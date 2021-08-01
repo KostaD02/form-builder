@@ -1,82 +1,26 @@
 section {
-  width: 600px;
-  margin: 30px auto;
+  margin: 30px 20px;
   font-family: "Roboto", sans-serif;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-section form input,
-textarea,
-select {
-  margin: 10px 0px 10px 0px;
-}
-section form {
-  border: 3px solid whitesmoke;
-  border-radius: 10px;
-  padding: 15px;
-}
-section form h2,
-h3 {
-  font-weight: 300;
-}
-section form .form-group {
-  border: 3px solid whitesmoke;
-  border-radius: 10px;
-  margin: 10px 0px 10px 0px;
-  padding: 10px;
-}
-section form p input {
-  margin-right: 10px;
-  margin-top: 3px;
-}
-section form p {
-  margin-top: 15px;
-}
-section .boxes {
-  width: 80%;
+.left {
+  width: 40%;
+  padding: 20px;
+  min-height: 500px;
   display: inline-block;
 }
-section .buttonBox {
-  float: right;
+.left textarea {
+  min-height: 329px;
 }
-section .buttonBox button {
+.left .input button {
   margin-top: 30px;
 }
-section .form-group button {
-  margin-top: 10px;
+.rigth {
+  width: 650px;
+  min-height: 460px;
+  float: right;
+  padding: 20px;
+  margin-right: 55px;
 }
-
-input.ng-dirty.ng-invalid {
-  box-shadow: red 0px 5px 15px !important;
-}
-input.ng-dirty.ng-valid {
-  box-shadow: green 0px 2px 10px !important;
-}
-
-section form textarea {
-  max-height: 300px;
-}
-/*scroolbar for textarea start */
-section form textarea::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #f5f5f5;
-  border-radius: 10px;
-}
-section form textarea::-webkit-scrollbar {
-  width: 10px;
-  background-color: #f5f5f5;
-}
-section form textarea::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: #fff;
-  background-image: -webkit-gradient(
-    linear,
-    40% 0%,
-    75% 84%,
-    from(#4d9c41),
-    to(#19911d),
-    color-stop(0.6, #54de5d)
-  );
-}
-/*scroolbar for textarea end */

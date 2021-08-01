@@ -1,83 +1,13 @@
-<section>
-
-    <form [formGroup]="myForm">
-        <h2>Student profile</h2>
-        <input type="text" class="form-control" placeholder="Full name * " formControlName="fullName" required
-            pattern="[a-zA-Z ]+">
-        <input type="mail" class="form-control" placeholder="Email* " formControlName="email" required
-            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-        <select class="form-select" formControlName="country" required>
-            <option selected value="ge">Georgia</option>
-            <option value="ua">Ukraine</option>
-            <option value="us">USA</option>
-            <option value="other">Other</option>
-        </select>
-        <input type="text" class="form-control" placeholder="Phone *" formControlName="phoneNumber" required
-            pattern="^[0-9]+[0-15]*$">
-        <input min="0" minlength="2" type="number" class="form-control" placeholder="Finished university years"
-            formControlName="universityYears">
-        <div class="form-group">
-            <h3>Primary technologies</h3>
-            <input type="text" class="form-control" placeholder="Technology * " required
-                formControlName="technologiesFirstIndexItem">
-            <input type="number" class="form-control" placeholder="Experience(years) * " required
-                pattern="^[0-9]+[0-99]*$" formControlName="technologiesFirstIndexitem">
-            <div class="box" formArrayName="technologies">
-                <div *ngFor="let technologies of technologiesForms.controls;let i=index" [formGroupName]="i">
-                    <div class="boxes">
-                        <input type="text" class="form-control" placeholder="Technology * " required
-                            formControlName="technology">
-                        <input type="number" class="form-control" placeholder="Experience(years) * " required
-                            formControlName="experience" pattern="^[0-9]+[0-15]*$">
-                    </div>
-                    <div class="buttonBox">
-                        <button class="btn btn-danger" (click)="deleteTechnologies(i)">Remove</button>
-                    </div>
-                </div>
-            </div>
-            <button (click)="addTechnologies()" class="btn btn-success">Add</button>
-        </div>
-        <input type="text" class="form-control" placeholder="Current job position" formControlName="currentPosition">
-        <textarea class="form-control" formControlName="plans" placeholder="Plans for the next year *"
-            rows="3"></textarea>
-        <div class="form-group">
-            <h3>Links</h3>
-            <input type="text" class="form-control" placeholder="GitHub profile *" required formControlName="github"
-                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
-            <input type="text" class="form-control" placeholder="Linkedin profile" formControlName="linkedin"
-                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
-            <input type="text" class="form-control" placeholder="Public website" formControlName="website"
-                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
-            <input type="text" class="form-control" placeholder="Link to CV" formControlName="cv"
-                pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
-        </div>
-        <div class="form-group">
-            <h3>Links to your projects</h3>
-            <input type="text" class="form-control" placeholder="Name *" required
-                formControlName="projectsFirstIndexItem">
-            <input type="text" class="form-control" placeholder="Link *" required
-                formControlName="projectsFirstIndexitem">
-            <div class="box" formArrayName="projects">
-                <div *ngFor="let projects of projectsForms.controls;let i=index" [formGroupName]="i">
-                    <div class="boxes">
-                        <input type="text" class="form-control" placeholder="Name *" required formControlName="name">
-                        <input type="text" class="form-control" placeholder="Link *" required formControlName="link"
-                            pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
-                    </div>
-                    <div class="buttonBox">
-                        <button class="btn btn-danger" (click)="deleteprojects(i)">Remove</button>
-                    </div>
-                </div>
-            </div>
-            <button (click)="addprojects()" class="btn btn-success">Add</button>
-        </div>
-        <p>
-            <input class="form-check-input" type="checkbox" formControlName="haveComputer">
-            <label class="form-check-label" for="haveComputer">
-                Have a computer and internet
-            </label>
-        </p>
-        <button [disabled]="!myForm.valid" class="btn btn-primary col-md-12"
-            (click)="createUser(myForm.value)">Sumbit</button>
-    </form>
+<section class="left">
+    <!--#1-->
+    <div class="input">
+        <h2>Input object</h2>
+        <textarea type="text" [(ngModel)]="schemaObject" class="form-control" placeholder="Enter object"></textarea>
+        <button class="btn btn-primary col-md-12" (click)="generateForm()">Generate</button>
+    </div>
+</section>
+<section class="rigth">
+    <h2 id="displayName">Waiting for input object</h2>
+    <hr>
+    <p id="additionalText"></p>
 </section>
