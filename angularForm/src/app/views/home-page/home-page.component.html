@@ -1,13 +1,33 @@
-<section class="left">
-    <!--#1-->
-    <div class="input">
-        <h2>Input object</h2>
-        <textarea type="text" [(ngModel)]="schemaObject" class="form-control" placeholder="Enter object"></textarea>
-        <button class="btn btn-primary col-md-12" (click)="generateForm()">Generate</button>
-    </div>
-</section>
-<section class="rigth">
-    <h2 id="displayName">Waiting for input object</h2>
-    <hr>
-    <p id="additionalText"></p>
+<section>
+    <article class="left">
+        <div class="input">
+            <h2>Input object</h2>
+            <textarea type="text" [(ngModel)]="schemaObject" class="form-control" placeholder="Enter object"></textarea>
+            <button class="btn btn-primary col-md-12" (click)="createForm()">Generate</button>
+        </div>
+    </article>
+    <article class="rigth">
+        <h2 id="displayName">Waiting for input object</h2>
+        <hr>
+        <p id="additionalText"></p>
+        <div class="display" *ngIf="clickedGenerate">
+            <form [formGroup]="myForm" (ngSubmit)="createForm()">
+                <div *ngFor="let property of testForm?.properties">
+                    <label class="form-label">{{property.label}}</label>
+                    <div
+                        *ngIf="['text','tel','password','email','number','search','tel','url'].includes(property.type)">
+                        <input class="form-control" [type]="property.type" [formControlName]="property.name" [value]="">
+                    </div>
+                    <div *ngIf="property.type=='enum'">
+                        <select class="form-select" [formControlName]="property.name">
+                            <option *ngFor="let option of property.options" [value]="option.value">{{option.label}}
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                <button class="btn btn-primary col-md-12">Submit form</button>
+            </form>
+        </div>
+    </article>
 </section>

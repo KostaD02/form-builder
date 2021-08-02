@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~12.1.0",
     "@angular/platform-browser-dynamic": "~12.1.0",
     "@angular/router": "~12.1.0",
+    "@ionic/cli": "^6.16.3",
     "bootstrap": "^5.0.2",
     "firebase": "^8.8.1",
     "jquery": "^3.6.0",

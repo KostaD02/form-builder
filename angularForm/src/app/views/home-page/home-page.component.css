@@ -1,4 +1,4 @@
-section {
+article {
   margin: 30px 20px;
   font-family: "Roboto", sans-serif;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -8,19 +8,17 @@ section {
 .left {
   width: 40%;
   padding: 20px;
-  min-height: 500px;
   display: inline-block;
 }
 .left textarea {
   min-height: 329px;
 }
-.left .input button {
+.left .input .btn-primary {
   margin-top: 30px;
 }
 .rigth {
-  width: 650px;
-  min-height: 460px;
+  width: 600px;
   float: right;
   padding: 20px;
-  margin-right: 55px;
+  margin-right: 50px;
 }

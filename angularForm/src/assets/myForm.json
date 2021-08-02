@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "name": "profile",
+  "label": "Student profile",
+  "properties": [
+    {
+      "type": "text",
+      "name": "fullName",
+      "label": "Full name",
+      "required": true
+    },
+    {
+      "type": "text",
+      "name": "email",
+      "label": "Email",
+      "inputType": "email",
+      "required": true
+    },
+    {
+      "type": "enum",
+      "name": "country",
+      "label": "Country",
+      "options": [
+        {
+          "value": "ge",
+          "label": "Georgia"
+        },
+        {
+          "value": "ua",
+          "label": "Ukraine"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "phone",
+      "label": "Phone",
+      "inputType": "tel",
+      "required": true,
+      "minLength": 8,
+      "maxLength": 20,
+      "pattern": "^\\d{8,20}$"
+    },
+    {
+      "type": "number",
+      "name": "universityYears",
+      "label": "Finished university years",
+      "integer": true,
+      "minimum": 1,
+      "maximum": 6
+    },
+    {
+      "type": "array",
+      "name": "technologies",
+      "label": "Primary technologies",
+      "required": true,
+      "item": {
+        "type": "object",
+        "name": "technology",
+        "properties": [
+          {
+            "type": "text",
+            "label": "Technology",
+            "name": "technology",
+            "required": true
+          },
+          {
+            "type": "number",
+            "label": "Experience (years)",
+            "name": "experience",
+            "integer": true,
+            "required": true
+          }
+        ]
+      }
+    }
+  ]
+}
