@@ -24,7 +24,13 @@
                             </option>
                         </select>
                     </div>
-
+                    <div *ngIf="property.type=='array'">
+                        <div class="form-group" *ngFor="let array of property.item?.properties">
+                            <label class="form-label">{{array.label}}</label>
+                            <input [type]="array.type" class="form-control" [value]=""
+                                [formControlName]="property.name">
+                        </div>
+                    </div>
                 </div>
                 <button class="btn btn-primary col-md-12">Submit form</button>
             </form>
