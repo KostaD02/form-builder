@@ -54,25 +54,27 @@
       "name": "technologies",
       "label": "Primary technologies",
       "required": true,
-      "item": {
-        "type": "object",
-        "name": "technology",
-        "properties": [
-          {
-            "type": "text",
-            "label": "Technology",
-            "name": "technology",
-            "required": true
-          },
-          {
-            "type": "number",
-            "label": "Experience (years)",
-            "name": "experience",
-            "integer": true,
-            "required": true
-          }
-        ]
-      }
+      "item": [
+        {
+          "type": "object",
+          "name": "technology",
+          "properties": [
+            {
+              "type": "text",
+              "label": "Technology",
+              "name": "technology",
+              "required": true
+            },
+            {
+              "type": "number",
+              "label": "Experience (years)",
+              "name": "experience",
+              "integer": true,
+              "required": true
+            }
+          ]
+        }
+      ]
     }
   ]
 }

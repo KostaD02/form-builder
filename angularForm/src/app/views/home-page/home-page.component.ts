@@ -1,64 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormsModule,
+  Form,
   FormBuilder,
-  FormGroup,
-  FormArray,
   FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { FirebaseClientService } from './../../services/firebase-client.service';
 import testJson from './../../../assets/myForm.json';
-interface Root {
-  type: string;
-  name: string;
-  label: string;
-  properties: Property[];
-}
-
-interface Property {
-  type: string;
-  name: string;
-  label: string;
-  required?: boolean;
-  inputType?: string;
-  options?: Option[];
-  minLength?: number;
-  maxLength?: number;
-  pattern?: string;
-  integer?: boolean;
-  minimum?: number;
-  maximum?: number;
-  item?: Item;
-  multiline?: boolean;
-  properties?: Property3[];
-}
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface Item {
-  type: string;
-  name: string;
-  properties: Property2[];
-}
-
-interface Property2 {
-  type: string;
-  name: string;
-  label: string;
-  required: boolean;
-  integer?: boolean;
-}
-
-interface Property3 {
-  type: string;
-  name: string;
-  label: string;
-  required: boolean;
-}
+import { Property, Root } from '../../interfaces';
 
 @Component({
   selector: 'app-home-page',
@@ -112,12 +62,43 @@ export class HomePageComponent implements OnInit {
             break;
         }
       }
-      this.myForm.addControl(
-        property.name,
-        this.fb.control('', validatorsToAdd)
-      );
+      if (property.type == 'array' && property.item) {
+        this.myForm.addControl(property.name, new FormGroup({}));
+        property.item.forEach((item, index) => {
+          console.log('esaa:', item);
+          if (
+            this.myForm.get(`${property.name}`) &&
+            this.myForm.get(`${property.name}`) instanceof FormGroup
+          ) {
+            (this.myForm.get(`${property.name}`) as FormGroup).addControl(
+              `${item.name}${index}`,
+              new FormGroup({})
+            );
+          }
+          item.properties.forEach((nestedItem) => {
+            console.log(nestedItem);
+            if (
+              this.myForm.get(`${item.name}${index}`) &&
+              this.myForm.get(`${item.name}${index}`) instanceof FormGroup
+            ) {
+              (this.myForm.get(`${item.name}${index}`) as FormGroup).addControl(
+                nestedItem.name,
+                new FormControl('', [])
+              );
+            }
+          });
+        });
+      } else {
+        this.myForm.addControl(
+          property.name,
+          this.fb.control('', validatorsToAdd)
+        );
+      }
     }
-    console.log('form valid:', this.myForm.valid);
-    console.log('form values:', this.myForm.value);
+    // console.log('form valid:', this.myForm.valid);
+    // console.log('form values:', this.myForm.value);
+  }
+  submitForm(form: FormGroup) {
+    console.log(form.getRawValue());
   }
 }
