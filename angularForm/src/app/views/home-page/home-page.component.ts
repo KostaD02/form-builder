@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import {
   Form,
   FormBuilder,
@@ -9,6 +9,7 @@ import {
 import { FirebaseClientService } from './../../services/firebase-client.service';
 import testJson from './../../../assets/myForm.json';
 import { Property, Root } from '../../interfaces';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-page',
@@ -18,19 +19,53 @@ import { Property, Root } from '../../interfaces';
 })
 export class HomePageComponent implements OnInit {
   clickedGenerate: boolean = false;
-  schemaObject!: Root;
   testForm: Root = testJson;
+  schemaObject: any = JSON.stringify(this.testForm);
   myForm: FormGroup = this.fb.group({});
   constructor(
     private firebase: FirebaseClientService,
     private fb: FormBuilder
   ) {}
-  ngOnInit(): void {
-    console.log(this.testForm);
+  ngOnInit(): void {}
+  reset() {
+    this.schemaObject = JSON.stringify(this.testForm);
+    this.clickedGenerate = false;
+    const h2Text = document.getElementById('displayName');
+    h2Text!.innerHTML = `Waiting for input object`;
+    h2Text!.style.color = 'black';
+    document.getElementById('additionalText')!.innerHTML = ``;
+    this.myForm.reset();
   }
   createForm() {
-    this.clickedGenerate = true;
-    this.generateForm(this.testForm.properties);
+    let isValid = true;
+    try {
+      let tempObj = JSON.parse(this.schemaObject as any);
+      if (tempObj.type == 'object') {
+        this.generateForm(tempObj.properties);
+        this.clickedGenerate = true;
+        const h2Text = document.getElementById('displayName');
+        h2Text!.innerHTML = `${tempObj.label}`;
+        h2Text!.style.color = 'black';
+        document.getElementById('additionalText')!.innerHTML = ``;
+      } else {
+        this.clickedGenerate = false;
+        this.myForm.reset();
+        const h2Text = document.getElementById('displayName');
+        h2Text!.innerHTML = 'Invalid schema';
+        h2Text!.style.color = 'red';
+        document.getElementById(
+          'additionalText'
+        )!.innerHTML = `Expecting "object" at 0.type but insted got:${tempObj.type}`;
+      }
+    } catch (error) {
+      if ((error = 'SyntaxError: Unexpected token u in JSON at position 0')) {
+        const h2Text = document.getElementById('displayName');
+        h2Text!.innerHTML = 'Invalid JSON';
+        h2Text!.style.color = 'red';
+      } else {
+        Swal.fire(`${error}`);
+      }
+    }
   }
   generateForm(properties: Property[]) {
     for (const property of properties) {
@@ -62,43 +97,49 @@ export class HomePageComponent implements OnInit {
             break;
         }
       }
-      if (property.type == 'array' && property.item) {
-        this.myForm.addControl(property.name, new FormGroup({}));
-        property.item.forEach((item, index) => {
-          console.log('esaa:', item);
-          if (
-            this.myForm.get(`${property.name}`) &&
-            this.myForm.get(`${property.name}`) instanceof FormGroup
-          ) {
-            (this.myForm.get(`${property.name}`) as FormGroup).addControl(
-              `${item.name}${index}`,
-              new FormGroup({})
-            );
-          }
-          item.properties.forEach((nestedItem) => {
-            console.log(nestedItem);
-            if (
-              this.myForm.get(`${item.name}${index}`) &&
-              this.myForm.get(`${item.name}${index}`) instanceof FormGroup
-            ) {
-              (this.myForm.get(`${item.name}${index}`) as FormGroup).addControl(
-                nestedItem.name,
-                new FormControl('', [])
-              );
-            }
-          });
-        });
-      } else {
-        this.myForm.addControl(
-          property.name,
-          this.fb.control('', validatorsToAdd)
-        );
-      }
+      // if (property.type == 'array' && property.item) {
+      //   this.myForm.addControl(property.name, new FormGroup({}));
+      //   property.item.forEach((item, index) => {
+      //     console.log('esaa:', item);
+      //     if (
+      //       this.myForm.get(`${property.name}`) &&
+      //       this.myForm.get(`${property.name}`) instanceof FormGroup
+      //     ) {
+      //       (this.myForm.get(`${property.name}`) as FormGroup).addControl(
+      //         `${item.name}${index}`,
+      //         new FormGroup({})
+      //       );
+      //     }
+      //     item.properties.forEach((nestedItem) => {
+      //       console.log(nestedItem);
+      //       if (
+      //         this.myForm.get(`${item.name}${index}`) &&
+      //         this.myForm.get(`${item.name}${index}`) instanceof FormGroup
+      //       ) {
+      //         (this.myForm.get(`${item.name}${index}`) as FormGroup).addControl(
+      //           `${nestedItem.name}`,
+      //           this.fb.control('', [])
+      //         );
+      //       }
+      //     });
+      //   });
+      // } else {
+      this.myForm.addControl(
+        property.name,
+        this.fb.control('', validatorsToAdd)
+      );
+      //}
     }
     // console.log('form valid:', this.myForm.valid);
     // console.log('form values:', this.myForm.value);
   }
   submitForm(form: FormGroup) {
-    console.log(form.getRawValue());
+    this.firebase.createUser(form.value);
+    Swal.fire({
+      title: '<strong>Sumbitted form</strong>',
+      html: `${JSON.stringify(form.value, null, 4)}`,
+      focusConfirm: true,
+    });
+    this.myForm.reset();
   }
 }
